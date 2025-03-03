@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "67c28408a9d7bfd22746a9a1"
+  },
+  "book_id": "AKNU0037",
+  "student_id": "67bd9a5537f2ac399a084404",
+  "username": "santoshi",
+  "email": "santoshijakkamsetti@gmail.com",
+  "mobile": {
+    "$numberLong": "9563267888"
+  },
+  "id_number": 5,
+  "book_name": "Thermodynamics: An Engineering Approach",
+  "category": "Mech",
+  "author": "Yunus A. Çengel",
+  "date": "2025-02-20",
+  "time": "01:45 PM",
+  "status": "Issued"
+},
+{
+  "_id": {
+    "$oid": "67c28408a9d7bfd22746a9a2"
+  },
+  "book_id": "AKNU0023",
+  "student_id": "67bd9a5537f2ac399a084404",
+  "username": "santoshi",
+  "email": "santoshijakkamsetti@gmail.com",
+  "mobile": {
+    "$numberLong": "9563267888"
+  },
+  "id_number": 5,
+  "book_name": "Data Structures and Algorithms",
+  "category": "CSE",
+  "author": "Mark A. Weiss",
+  "date": "2025-02-24",
+  "time": "10:00 AM",
+  "status": "Issued"
+},
+{
+  "_id": {
+    "$oid": "67c28408a9d7bfd22746a9a3"
+  },
+  "book_id": "AKNU0023",
+  "student_id": "67bd9a5537f2ac399a084404",
+  "username": "santoshi",
+  "email": "santoshijakkamsetti@gmail.com",
+  "mobile": {
+    "$numberLong": "9563267888"
+  },
+  "id_number": 5,
+  "book_name": "Data Structures and Algorithms",
+  "category": "CSE",
+  "author": "Mark A. Weiss",
+  "date": "2025-02-25",
+  "time": "03:30 PM",
+  "status": "Returned"
+},
+{
+  "_id": {
+    "$oid": "67c28408a9d7bfd22746a9a4"
+  },
+  "book_id": "AKNU0010",
+  "student_id": "67bd9a5537f2ac399a084404",
+  "username": "santoshi",
+  "email": "santoshijakkamsetti@gmail.com",
+  "mobile": {
+    "$numberLong": "9563267888"
+  },
+  "id_number": 5,
+  "book_name": "Introduction to Machine Learning",
+  "category": "CSE",
+  "author": "Tom M. Mitchell",
+  "date": "2025-02-28",
+  "time": "10:15 AM",
+  "status": "Issued"
+}]

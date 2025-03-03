@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "67c1f64d9f72c55b54059fae"
+  },
+  "username": "santoshi",
+  "email": "santoshijakkamsetti@gmail.com",
+  "password": "$2y$10$txMNQ1pdau/KgnxGB/rMWeGy.tnESJo5letN/Tu6aQ/iOX9CYKRmS",
+  "mobile": "9563267888"
+},
+{
+  "_id": {
+    "$oid": "67c46adb5f891fe78c0207f3"
+  },
+  "username": "sanjay",
+  "email": "lokeshchandana96@gmail.com",
+  "password": "$2y$10$/YjMJmmpD5oJc9WsbuvV6umhuJh0LUt2B7t66/MwubS3pAt3ubSDG",
+  "mobile": "9392069813"
+}]

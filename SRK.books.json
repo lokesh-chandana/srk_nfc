@@ -1,0 +1,500 @@
+[{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95a"
+  },
+  "Book ID": "AKNU0001",
+  "Book Name": "Advanced EEE Engineering",
+  "Category": "EEE",
+  "Price": 210.5,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95b"
+  },
+  "Book ID": "AKNU0002",
+  "Book Name": "Advanced Mech Engineering",
+  "Category": "Mech",
+  "Price": 221,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95c"
+  },
+  "Book ID": "AKNU0003",
+  "Book Name": "Advanced Civil Engineering",
+  "Category": "Civil",
+  "Price": 231.5,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95d"
+  },
+  "Book ID": "AKNU0004",
+  "Book Name": "Advanced Physics Engineering",
+  "Category": "Physics",
+  "Price": 242,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95e"
+  },
+  "Book ID": "AKNU0005",
+  "Book Name": "Advanced Maths Engineering",
+  "Category": "Maths",
+  "Price": 252.5,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a95f"
+  },
+  "Book ID": "AKNU0006",
+  "Book Name": "Advanced Electronics Engineering",
+  "Category": "Electronics",
+  "Price": 263,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a960"
+  },
+  "Book ID": "AKNU0007",
+  "Book Name": "Advanced AI Engineering",
+  "Category": "AI",
+  "Price": 273.5,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a961"
+  },
+  "Book ID": "AKNU0008",
+  "Book Name": "Advanced Data Science Engineering",
+  "Category": "Data Science",
+  "Price": 284,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a962"
+  },
+  "Book ID": "AKNU0009",
+  "Book Name": "Advanced IT Engineering",
+  "Category": "IT",
+  "Price": 294.5,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a963"
+  },
+  "Book ID": "AKNU0010",
+  "Book Name": "Advanced CSE Engineering",
+  "Category": "CSE",
+  "Price": 305,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a964"
+  },
+  "Book ID": "AKNU0011",
+  "Book Name": "Advanced EEE Engineering",
+  "Category": "EEE",
+  "Price": 315.5,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a965"
+  },
+  "Book ID": "AKNU0012",
+  "Book Name": "Advanced Mech Engineering",
+  "Category": "Mech",
+  "Price": 326,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a966"
+  },
+  "Book ID": "AKNU0013",
+  "Book Name": "Advanced Civil Engineering",
+  "Category": "Civil",
+  "Price": 336.5,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a967"
+  },
+  "Book ID": "AKNU0014",
+  "Book Name": "Advanced Physics Engineering",
+  "Category": "Physics",
+  "Price": 347,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a968"
+  },
+  "Book ID": "AKNU0015",
+  "Book Name": "Advanced Maths Engineering",
+  "Category": "Maths",
+  "Price": 357.5,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a969"
+  },
+  "Book ID": "AKNU0016",
+  "Book Name": "Advanced Electronics Engineering",
+  "Category": "Electronics",
+  "Price": 368,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96a"
+  },
+  "Book ID": "AKNU0017",
+  "Book Name": "Advanced AI Engineering",
+  "Category": "AI",
+  "Price": 378.5,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96b"
+  },
+  "Book ID": "AKNU0018",
+  "Book Name": "Advanced Data Science Engineering",
+  "Category": "Data Science",
+  "Price": 389,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96c"
+  },
+  "Book ID": "AKNU0019",
+  "Book Name": "Advanced IT Engineering",
+  "Category": "IT",
+  "Price": 399.5,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96d"
+  },
+  "Book ID": "AKNU0020",
+  "Book Name": "Advanced CSE Engineering",
+  "Category": "CSE",
+  "Price": 410,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96e"
+  },
+  "Book ID": "AKNU0021",
+  "Book Name": "Advanced EEE Engineering",
+  "Category": "EEE",
+  "Price": 420.5,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a96f"
+  },
+  "Book ID": "AKNU0022",
+  "Book Name": "Advanced Mech Engineering",
+  "Category": "Mech",
+  "Price": 431,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a970"
+  },
+  "Book ID": "AKNU0023",
+  "Book Name": "Advanced Civil Engineering",
+  "Category": "Civil",
+  "Price": 441.5,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a971"
+  },
+  "Book ID": "AKNU0024",
+  "Book Name": "Advanced Physics Engineering",
+  "Category": "Physics",
+  "Price": 452,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a972"
+  },
+  "Book ID": "AKNU0025",
+  "Book Name": "Advanced Maths Engineering",
+  "Category": "Maths",
+  "Price": 462.5,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a973"
+  },
+  "Book ID": "AKNU0026",
+  "Book Name": "Advanced Electronics Engineering",
+  "Category": "Electronics",
+  "Price": 473,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a974"
+  },
+  "Book ID": "AKNU0027",
+  "Book Name": "Advanced AI Engineering",
+  "Category": "AI",
+  "Price": 483.5,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a975"
+  },
+  "Book ID": "AKNU0028",
+  "Book Name": "Advanced Data Science Engineering",
+  "Category": "Data Science",
+  "Price": 494,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a976"
+  },
+  "Book ID": "AKNU0029",
+  "Book Name": "Advanced IT Engineering",
+  "Category": "IT",
+  "Price": 504.5,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a977"
+  },
+  "Book ID": "AKNU0030",
+  "Book Name": "Advanced CSE Engineering",
+  "Category": "CSE",
+  "Price": 515,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a978"
+  },
+  "Book ID": "AKNU0031",
+  "Book Name": "Advanced EEE Engineering",
+  "Category": "EEE",
+  "Price": 525.5,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a979"
+  },
+  "Book ID": "AKNU0032",
+  "Book Name": "Advanced Mech Engineering",
+  "Category": "Mech",
+  "Price": 536,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97a"
+  },
+  "Book ID": "AKNU0033",
+  "Book Name": "Advanced Civil Engineering",
+  "Category": "Civil",
+  "Price": 546.5,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97b"
+  },
+  "Book ID": "AKNU0034",
+  "Book Name": "Advanced Physics Engineering",
+  "Category": "Physics",
+  "Price": 557,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97c"
+  },
+  "Book ID": "AKNU0035",
+  "Book Name": "Advanced Maths Engineering",
+  "Category": "Maths",
+  "Price": 567.5,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97d"
+  },
+  "Book ID": "AKNU0036",
+  "Book Name": "Advanced Electronics Engineering",
+  "Category": "Electronics",
+  "Price": 578,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97e"
+  },
+  "Book ID": "AKNU0037",
+  "Book Name": "Advanced AI Engineering",
+  "Category": "AI",
+  "Price": 588.5,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a97f"
+  },
+  "Book ID": "AKNU0038",
+  "Book Name": "Advanced Data Science Engineering",
+  "Category": "Data Science",
+  "Price": 599,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a980"
+  },
+  "Book ID": "AKNU0039",
+  "Book Name": "Advanced IT Engineering",
+  "Category": "IT",
+  "Price": 609.5,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a981"
+  },
+  "Book ID": "AKNU0040",
+  "Book Name": "Advanced CSE Engineering",
+  "Category": "CSE",
+  "Price": 620,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a982"
+  },
+  "Book ID": "AKNU0041",
+  "Book Name": "Advanced EEE Engineering",
+  "Category": "EEE",
+  "Price": 630.5,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a983"
+  },
+  "Book ID": "AKNU0042",
+  "Book Name": "Advanced Mech Engineering",
+  "Category": "Mech",
+  "Price": 641,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a984"
+  },
+  "Book ID": "AKNU0043",
+  "Book Name": "Advanced Civil Engineering",
+  "Category": "Civil",
+  "Price": 651.5,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a985"
+  },
+  "Book ID": "AKNU0044",
+  "Book Name": "Advanced Physics Engineering",
+  "Category": "Physics",
+  "Price": 662,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a986"
+  },
+  "Book ID": "AKNU0045",
+  "Book Name": "Advanced Maths Engineering",
+  "Category": "Maths",
+  "Price": 672.5,
+  "Author": "Dr. A. Kumar"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a987"
+  },
+  "Book ID": "AKNU0046",
+  "Book Name": "Advanced Electronics Engineering",
+  "Category": "Electronics",
+  "Price": 683,
+  "Author": "Dr. S. Sharma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a988"
+  },
+  "Book ID": "AKNU0047",
+  "Book Name": "Advanced AI Engineering",
+  "Category": "AI",
+  "Price": 693.5,
+  "Author": "Prof. R. Verma"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a989"
+  },
+  "Book ID": "AKNU0048",
+  "Book Name": "Advanced Data Science Engineering",
+  "Category": "Data Science",
+  "Price": 704,
+  "Author": "Dr. P. Gupta"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a98a"
+  },
+  "Book ID": "AKNU0049",
+  "Book Name": "Advanced IT Engineering",
+  "Category": "IT",
+  "Price": 714.5,
+  "Author": "Dr. M. Reddy"
+},
+{
+  "_id": {
+    "$oid": "67c2727aa9d7bfd22746a98b"
+  },
+  "Book ID": "AKNU0050",
+  "Book Name": "Advanced CSE Engineering",
+  "Category": "CSE",
+  "Price": 725,
+  "Author": "Dr. A. Kumar"
+}]
