@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SRK</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background-color: #121212;
+			color: white;
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		.login_link{
+			cursor: pointer;
+		}
+
+		.nav-link{
+			cursor: pointer;
+		}
+
+		.table-responsive {
+		    max-width: 100%;
+		    overflow-x: auto;
+		}
+
+		.table th, .table td {
+		    white-space: nowrap;
+		    font-size: 14px;
+		}
+
+		.navbar {
+		    width: 100%;
+		    min-height: 60px;
+		    z-index: 1050;
+		}
+
+		.navbar-nav {
+		    flex-wrap: wrap;
+		}
+
+		@media (max-width: 768px) {
+		    .navbar-brand {
+		        font-size: 16px;
+		        text-align: center;
+		    }
+
+		    .navbar-nav {
+		        text-align: center;
+		        width: 100%;
+		    }
+
+		    .nav-item {
+		        width: 100%;
+		    }
+
+		    .table th, .table td {
+		        font-size: 12px;
+		    }
+		}
+
+		#openPageDiv {
+		    margin-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app" >
+		<div v-if="!loggedIn" class="container d-flex justify-content-center align-items-center vh-100">
+			<div class="card bg-dark text-light p-4" style="width: 22rem;">
+				<div class="card-body">
+					<div v-if="showLogin" key="login">
+						<h5 class="card-title">Login</h5>
+						<input type="text" class="form-control mb-2" placeholder="Username" v-model="loginData.username">
+						<input type="password" class="form-control mb-2" placeholder="Password" v-model="loginData.password" @keyup.enter="login">
+						<button class="btn btn-primary w-100" @click="login">Login</button>
+						<div v-if="errorMessage!=''">
+							<p class="text-danger text-center">{{ errorMessage }}</p>
+						</div>
+						<p class="mt-2 text-center">
+							First Login? <a @click="toggleLogin('signUp')" class="text-info btn-link login_link">Sign Up Here</a>
+						</p>
+					</div>
+					<div v-else key="signup">
+						<h5 class="card-title">Signup</h5>
+						<div v-if="userFound">
+							<p>Hello! <b>{{ student_details.name }}</b></p>
+							<input type="text" class="form-control mb-2" placeholder="New Username" v-model="signupData.username">
+							<input readonly type="email" class="form-control mb-2" placeholder="Email" v-model="signupData.email">
+							<input type="password" class="form-control mb-2" placeholder="Password" v-model="signupData.password" @keyup.enter="signup">
+							<button class="btn btn-success w-100" @click="signup">Signup</button>
+						</div>
+						<div v-else>
+							<input type="number" class="form-control mb-2" placeholder="Enter Mobile Number" v-model="signupData.mobile" @keyup.enter="search_student">
+							<button class="btn btn-success w-100" @click="search_student">Search Student</button>
+						</div>
+						<div v-if="errorMessage!=''">
+							<p class="text-danger text-center">{{ errorMessage }}</p>
+						</div>
+						<p class="mt-2 text-center">
+							Already have an account? <br><a @click="toggleLogin('Login')" class="text-info btn-link login_link">Login Here</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-else>
+			<div>
+			    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+				    <div class="container-fluid">
+				        <a class="navbar-brand text-white" href="#"><b>Seamless<br>Resource Keeper</b></a>
+				        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				            <span class="navbar-toggler-icon"></span>
+				        </button>
+				        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+				            <ul class="navbar-nav">
+				                <template v-if="user.role === 'student'">
+				                    <li class="nav-item">
+				                        <a class="nav-link text-white" @click="closeNavbar('transactions')">Transactions</a>
+				                    </li>
+				                    <li class="nav-item">
+				                        <a class="nav-link text-white" @click="closeNavbar('books_list')">My Books</a>
+				                    </li>
+				                    <li class="nav-item">
+				                        <a class="nav-link text-white" @click="closeNavbar('profile')">Profile</a>
+				                    </li>
+				                </template>
+
+				                <!-- Librarian Navigation -->
+				                <template v-if="user.role === 'librarian'">
+					                <li class="nav-item">
+					                    <a class="nav-link text-white" @click="closeNavbar('all_transactions')">All Transactions</a>
+					                </li>
+					                <li class="nav-item">
+					                    <a class="nav-link text-white" @click="closeNavbar('all_books')">All Books</a>
+					                </li>
+					                <li class="nav-item">
+					                    <a class="nav-link text-white" @click="closeNavbar('user_management')">User Management</a>
+					                </li>
+					                <li class="nav-item">
+					                    <a class="nav-link text-white" @click="closeNavbar('new_record')">New Record</a>
+					                </li>
+				                </template>
+				                <li class="nav-item">
+				                    <button class="btn btn-sm btn-danger" @click="logout">Logout</button>
+				                </li>
+				            </ul>
+				        </div>
+				    </div>
+				</nav>
+			</div>
+			<div id="openPageDiv">
+				<div v-if="openedPage === 'transactions'">
+					<h3>Recent Transactions</h3>
+			        <div class="table-responsive">
+					    <table class="table table-sm table-dark">
+					        <thead class="thead-dark">
+					            <tr>
+					                <th>Book ID</th>
+					                <th>Book Name</th>
+					                <th>Date</th>
+					                <th>Time</th>
+					                <th>Status</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <tr v-for="transaction in transactions" :key="transaction.book_id">
+					                <td>{{ transaction.book_id }}</td>
+					                <td>{{ transaction.book_name }}</td>
+					                <td>{{ transaction.date }}</td>
+					                <td>{{ transaction.time }}</td>
+					                <td>
+					                    <span :class="getStatusClass(transaction.status)">
+					                        {{ transaction.status }}
+					                    </span>
+					                </td>
+					            </tr>
+					        </tbody>
+					    </table>
+					</div>
+				</div>
+				<div v-else-if="openedPage === 'books_list'">
+					<h3>My Books</h3>
+				    <div class="table-responsive">
+				        <table class="table table-sm table-dark">
+				            <thead class="thead-dark">
+				                <tr>
+				                    <th>Book ID</th>
+				                    <th>Book Name</th>
+				                    <th>Status</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr v-for="book in uniqueBooks" :key="book.book_id">
+				                    <td>{{ book.book_id }}</td>
+				                    <td>{{ book.book_name }}</td>
+				                    <td>
+				                        <span :class="getStatusClass(book.status)">
+				                            {{ book.status }}
+				                        </span>
+				                    </td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<div v-else-if="openedPage === 'profile'">
+					<h3>Profile</h3>
+				    <div class="card bg-dark text-light p-4">
+				        <div class="card-body">
+				            <div v-if="!editMode">
+				                <p><b>Username:</b> {{ student.username }}</p>
+				                <p><b>Email:</b> {{ student.email }}</p>
+				                <p><b>Mobile:</b> {{ student.mobile }}</p>
+				                <p><b>ID Number:</b> {{ student.id_number }}</p>
+				                <button class="btn btn-warning" @click="editMode = true">Edit</button>
+				            </div>
+				            <div v-else>
+				                <label>Username</label>
+				                <input type="text" class="form-control mb-2" v-model="student.username">
+				                
+				                <label>Email</label>
+				                <input type="email" class="form-control mb-2" v-model="student.email">
+				                
+				                <label>Mobile</label>
+				                <input type="text" class="form-control mb-2" v-model="student.mobile">
+				                
+				                <label>ID Number</label>
+				                <input type="text" class="form-control mb-2" v-model="student.id_number" readonly>
+				                
+				                <button class="btn btn-success" @click="saveProfile">Save</button>
+				                <button class="btn btn-secondary ms-2" @click="editMode = false">Cancel</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				<div v-else-if="openedPage === 'all_transactions'">
+					<h3>Recent Transactions</h3>
+			        <div class="table-responsive">
+					    <table class="table table-sm table-dark">
+					        <thead class="thead-dark">
+					            <tr>
+					                <th>Book ID</th>
+					                <th>Student ID</th>
+					                <th>Book Name</th>
+					                <th>Date</th>
+					                <th>Time</th>
+					                <th>Status</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <tr v-for="transaction in transactions" :key="transaction.book_id">
+					                <td>{{ transaction.book_id }}</td>
+					                <td>{{ transaction.student_name }}</td>
+					                <td>{{ transaction.book_name }}</td>
+					                <td>{{ transaction.date }}</td>
+					                <td>{{ transaction.time }}</td>
+					                <td>
+					                    <span :class="getStatusClass(transaction.status)">
+					                        {{ transaction.status }}
+					                    </span>
+					                </td>
+					            </tr>
+					        </tbody>
+					    </table>
+					</div>
+				</div>
+				<div v-else-if="openedPage === 'all_books'">
+				    <h3>Books Data</h3>
+				    <div class="table-responsive">
+				        <table class="table table-sm table-dark">
+				            <thead class="thead-dark">
+				                <tr>
+				                    <th>Book ID</th>
+				                    <th>Book Name</th>
+				                    <th>Category</th>
+				                    <th>Price</th>
+				                    <th>Author</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr v-for="book in all_books" :key="book.book_id">
+				                    <td>{{ book.book_id }}</td>
+				                    <td>{{ book.book_name }}</td>
+				                    <td>{{ book.category }}</td>
+				                    <td>{{ book.price }}</td>
+				                    <td>{{ book.author }}</td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<div v-else-if="openedPage === 'user_management'">
+				    <h3>User Management</h3>
+				    <div class="table-responsive">
+				        <table class="table table-sm table-dark">
+				            <thead class="thead-dark">
+				                <tr>
+				                    <th>Student ID</th>
+				                    <th>Name</th>
+				                    <th>Email</th>
+				                    <th>Mobile</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr v-for="student in all_students" :key="student.student_id">
+				                    <td>{{ student.student_id }}</td>
+				                    <td>{{ student.name }}</td>
+				                    <td>{{ student.email }}</td>
+				                    <td>{{ student.mobile }}</td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<!-- Add this within <div id="openPageDiv"> after user_management -->
+				<div v-else-if="openedPage === 'new_record'">
+				    <h3>New Record</h3>
+				    <!-- Button to trigger the modal -->
+				    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newRecordModal">Add New Transaction</button>
+
+				    <!-- Bootstrap Modal -->
+				    <div class="modal fade" id="newRecordModal" tabindex="-1" aria-labelledby="newRecordModalLabel" aria-hidden="true">
+				        <div class="modal-dialog">
+				            <div class="modal-content bg-dark text-light">
+				                <div class="modal-header">
+				                    <h5 class="modal-title" id="newRecordModalLabel">Add New Transaction</h5>
+				                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				                </div>
+				                <div class="modal-body">
+				                    <form @submit.prevent="addNewRecord">
+				                        <div class="mb-3">
+				                            <label for="bookId" class="form-label">Book ID</label>
+				                            <input type="text" class="form-control" id="bookId" v-model="newRecord.book_id" placeholder="e.g., AKNU0001" required>
+				                        </div>
+				                        <div class="mb-3">
+				                            <label for="studentId" class="form-label">Student ID</label>
+				                            <input type="text" class="form-control" id="studentId" v-model="newRecord.student_id" placeholder="e.g., 507f1f77bcf86cd799439011" required>
+				                        </div>
+				                        <div class="mb-3">
+				                            <label for="date" class="form-label">Date</label>
+				                            <input type="date" class="form-control" id="date" v-model="newRecord.date" required>
+				                        </div>
+				                        <div class="mb-3">
+				                            <label for="time" class="form-label">Time</label>
+				                            <input type="time" class="form-control" id="time" v-model="newRecord.time" required>
+				                        </div>
+				                        <div class="mb-3">
+				                            <label for="status" class="form-label">Status</label>
+				                            <select class="form-select" id="status" v-model="newRecord.status" required>
+				                                <option value="Issued">Issued</option>
+				                                <option value="Pending">Pending</option>
+				                                <option value="Returned">Returned</option>
+				                                <option value="Overdue">Overdue</option>
+				                            </select>
+				                        </div>
+				                        <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+				                    </form>
+				                </div>
+				                <div class="modal-footer">
+				                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				                    <button type="button" class="btn btn-success" @click="addNewRecord">Save Transaction</button>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var app = Vue.createApp({
+			data() {
+				return {
+					showLogin: true,
+					loginData: {
+						username: '',
+						password: ''
+					},
+					userFound: false,
+					signupData: {
+						username: '',
+						email: '',
+						password: '',
+						mobile:''
+					},
+					errorMessage:'',
+					student_details:{},
+					loggedIn: false,
+					transactions: [],
+        			openedPage: 'transactions',
+        			student: {},
+        			editMode: false,
+        			all_books:'',
+        			all_students:'',
+        			newRecord: { // Add this for the modal form
+		                book_id: '',
+		                student_id: '',
+		                date: '',
+		                time: '',
+		                status: 'Issued' // Default value
+		            },
+				};
+			},
+			mounted(){
+				this.checkLoginStatus();
+			},
+			computed: {
+			    uniqueBooks() {
+			        const bookMap = new Map();
+			        this.transactions.forEach(transaction => {
+			            if (!bookMap.has(transaction.book_id)) {
+			                bookMap.set(transaction.book_id, transaction);
+			            }
+			        });
+			        return Array.from(bookMap.values());
+			    }
+			},
+			methods: {
+				closeNavbar(page) {
+			        this.openPage(page);
+			        let navCollapse = document.getElementById("navbarNav");
+			        if (navCollapse.classList.contains("show")) {
+			            new bootstrap.Collapse(navCollapse, { toggle: true });
+			        }
+			    },
+				getStatusClass(status) {
+			        switch (status.toLowerCase()) {
+			            case "returned":
+			                return "badge bg-success";
+			            case "pending":
+			                return "badge bg-warning text-dark";
+			            case "overdue":
+			                return "badge bg-danger";
+			            default:
+			                return "badge bg-secondary";
+			        }
+			    },
+				checkLoginStatus() {
+		            fetch('actions.php', {
+		                method: 'POST',
+		                body: new URLSearchParams({ action: 'check_login' })
+		            })
+		            .then(response => response.json())
+		            .then(data => {
+		            	if (data.success) {
+				            this.user = data.user;
+				            this.loggedIn = true;
+				            if (data.user.role === 'librarian') {
+				                this.openPage('all_transactions');
+				                // this.openPage('all_books');
+				                this.fetchAllTransactions();
+				                this.fetchAllBooks();
+				                this.fetchStudents();
+				            } else {
+				                this.openPage('transactions');
+				                this.fetchTransactions();
+				                this.fetchProfile();
+				            }
+				        }
+		            })
+		            .catch(error => console.error("Error checking login status:", error));
+		        },
+		        openPage( vdata ){
+		        	if (this.user.role === 'librarian') {
+				        this.openedPage = vdata === 'transactions' ? 'all_transactions' : vdata;
+				    } else {
+				        this.openedPage = vdata;
+				    }
+		        },
+			    search_student() {
+			        this.errorMessage = '';
+
+			        const mobile = String(this.signupData.mobile);
+			        const mobileRegex = /^[6-9]\d{9}$/; 
+
+			        if (!mobile.match(mobileRegex)) {
+			            this.errorMessage = 'Please enter a valid mobile number';
+			            return;
+			        }
+
+			        const formData = new FormData();
+			        formData.append('action', 'search_student');
+			        formData.append('mobile_number', mobile);
+
+			        fetch('actions.php', {
+			            method: 'POST',
+			            body: formData
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			            if (data.success) {
+			                this.student_details = data.student;
+			                this.signupData.email = data.student.email;
+			                this.userFound = true;
+			            } else {
+			                this.errorMessage = data.message;
+			                this.userFound = false;
+			            }
+			        })
+			        .catch(error => {
+			            console.error("Error:", error);
+			            this.errorMessage = "An error occurred while processing the request.";
+			        });
+			    },
+
+			    signup() {
+			        this.errorMessage = '';
+
+			        if (!this.signupData.username || !this.signupData.email || !this.signupData.password) {
+			            this.errorMessage = 'All fields are required!';
+			            return;
+			        }
+
+			        const formData = new FormData();
+			        formData.append('action', 'signup');
+			        formData.append('username', this.signupData.username);
+			        formData.append('email', this.signupData.email);
+			        formData.append('password', this.signupData.password);
+			        formData.append('mobile', this.signupData.mobile);
+
+			        fetch('actions.php', {
+			            method: 'POST',
+			            body: formData
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			            if (data.success) {
+			                alert("Signup successful! Please login.");
+			                this.toggleLogin('Login');
+			            } else {
+			                this.errorMessage = data.message;
+			            }
+			        })
+			        .catch(error => {
+			            console.error("Error:", error);
+			            this.errorMessage = "An error occurred while processing the request.";
+			        });
+			    },
+			    logout() {
+				    fetch('actions.php', {
+				        method: 'POST',
+				        body: new URLSearchParams({ action: 'logout' })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            this.loggedIn = false;
+				            this.user = {};
+				        }
+				    })
+				    .catch(error => console.error("Error logging out:", error));
+				},
+			    toggleLogin(vdata){
+					this.loginData['username'] = '';
+					this.loginData['password'] = '';
+					this.signupData['mobile'] = '';
+					this.signupData['email'] = '';
+					this.signupData['username'] = '';
+					this.signupData['password'] = '';
+					if (vdata == 'signUp') {
+						this.showLogin = false;
+					}else if (vdata == 'Login') {
+						this.showLogin = true;
+					}
+				},
+				login() {
+			        this.errorMessage = '';
+
+			        if (!this.loginData.username || !this.loginData.password) {
+			            this.errorMessage = 'Username and password are required!';
+			            return;
+			        }
+
+			        const formData = new FormData();
+			        formData.append('action', 'login');
+			        formData.append('username', this.loginData.username);
+			        formData.append('password', this.loginData.password);
+
+			        fetch('actions.php', {
+			            method: 'POST',
+			            body: formData
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			            if (data.success) {
+			                this.user = data.user;
+			                this.showLogin = false;
+			                this.loggedIn = true;
+			                // this.openPage('transactions');
+            				// this.fetchTransactions();
+            				// this.fetchProfile();
+            				if (this.user.role === 'librarian') {
+				                this.openPage('all_transactions');
+				                 // this.openPage('all_books');
+				                this.fetchAllTransactions();
+				                this.fetchAllBooks();
+				                this.fetchStudents();
+				            } else {
+				                this.openPage('transactions');
+				                this.fetchTransactions(); // Fetch only the student's transactions
+				                this.fetchProfile();
+				            }
+			            } else {
+			                this.errorMessage = data.message;
+			            }
+			        })
+			        .catch(error => {
+			            console.error("Error:", error);
+			            this.errorMessage = "An error occurred while processing the request.";
+			        });
+			    },
+			    fetchTransactions() {
+				    fetch('actions.php', {
+				        method: 'POST',
+				        body: new URLSearchParams({ action: 'fetch_transactions' })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            this.transactions = data.transactions;
+				        } else {
+				            console.error("No transactions found.");
+				        }
+				    })
+				    .catch(error => console.error("Error fetching transactions:", error));
+				},
+				fetchProfile() {
+			        fetch('actions.php', {
+			            method: 'POST',
+			            body: new URLSearchParams({ action: 'fetch_profile' })
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			            if (data.success) {
+			                this.student = data.student;
+			            } else {
+			                console.error("Error fetching profile:", data.message);
+			            }
+			        })
+			        .catch(error => console.error("Error:", error));
+			    },
+				saveProfile() {
+			        const formData = new FormData();
+			        formData.append('action', 'update_profile');
+			        formData.append('username', this.student.username);
+			        formData.append('email', this.student.email);
+			        formData.append('mobile', this.student.mobile);
+
+			        fetch('actions.php', {
+			            method: 'POST',
+			            body: formData
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			            if (data.success) {
+			                alert("Profile updated successfully!");
+			                this.editMode = false;
+			            } else {
+			                alert("Error updating profile: " + data.message);
+			            }
+			        })
+			        .catch(error => console.error("Error:", error));
+			    },
+			    fetchAllTransactions() {
+				    fetch('actions.php', {
+				        method: 'POST',
+				        body: new URLSearchParams({ action: 'fetch_all_transactions' })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            this.transactions = data.transactions;
+				        } else {
+				            console.error("No transactions found.");
+				        }
+				    })
+				    .catch(error => console.error("Error fetching transactions:", error));
+				},
+				fetchAllBooks() {
+					fetch('actions.php', {
+				        method: 'POST',
+				        body: new URLSearchParams({ action: 'fetch_all_books' })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            this.all_books = data.books;
+				        } else {
+				            console.error("No transactions found.");
+				        }
+				    })
+				    .catch(error => console.error("Error fetching transactions:", error));
+				},
+				fetchStudents() {
+					fetch('actions.php', {
+				        method: 'POST',
+				        body: new URLSearchParams({ action: 'fetch_all_students' })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            this.all_students = data.students;
+				        } else {
+				            console.error("No transactions found.");
+				        }
+				    })
+				    .catch(error => console.error("Error fetching transactions:", error));
+				},
+				addNewRecord() {
+		            this.errorMessage = '';
+
+		            // Basic validation
+		            if (!this.newRecord.book_id || !this.newRecord.student_id || !this.newRecord.date || !this.newRecord.time || !this.newRecord.status) {
+		                this.errorMessage = 'All fields are required!';
+		                return;
+		            }
+
+		            const formData = new FormData();
+		            formData.append('action', 'add_transaction');
+		            formData.append('book_id', this.newRecord.book_id);
+		            formData.append('student_id', this.newRecord.student_id);
+		            formData.append('date', this.newRecord.date);
+		            formData.append('time', this.newRecord.time);
+		            formData.append('status', this.newRecord.status);
+
+		            fetch('actions.php', {
+		                method: 'POST',
+		                body: formData
+		            })
+		            .then(response => response.json())
+		            .then(data => {
+		                if (data.success) {
+		                    alert('Transaction added successfully!');
+		                    // Reset form
+		                    this.newRecord = {
+		                        book_id: '',
+		                        student_id: '',
+		                        date: '',
+		                        time: '',
+		                        status: 'Issued'
+		                    };
+		                    // Close modal programmatically
+		                    bootstrap.Modal.getInstance(document.getElementById('newRecordModal')).hide();
+		                    // Refresh transactions
+		                    this.fetchAllTransactions();
+		                } else {
+		                    this.errorMessage = data.message || 'Failed to add transaction.';
+		                }
+		            })
+		            .catch(error => {
+		                console.error('Error adding transaction:', error);
+		                this.errorMessage = 'An error occurred while adding the transaction.';
+		            });
+		        }
+			}
+		}).mount("#app");
+	</script>
+</body>
+</html>
